@@ -6,7 +6,7 @@
 vim.api.nvim_create_user_command('GlobUpdate', function()
 	-- ALT: vim.ui.input
 	local glob = require('telescope-glob.init')
-	local glob_value = glob.get_glob() or ''
+	local glob_value = glob.get_glob()
 	local prefix = ":lua require('telescope-glob.init').set_glob({ value = '"
 	local suffix = "' })"
 	vim.api.nvim_input(prefix .. glob_value .. suffix)
@@ -23,7 +23,7 @@ end, {
 ---```
 vim.api.nvim_create_user_command('GlobDir', function()
 	local glob = require('telescope-glob.init')
-	local glob_value = glob.get_glob() or ''
+	local glob_value = glob.get_glob()
 	local prefix = ":lua require('telescope-glob.init').set_glob({ value = '**/"
 	local suffix = "/**/*' })"
 	vim.api.nvim_input(prefix .. glob_value .. suffix)

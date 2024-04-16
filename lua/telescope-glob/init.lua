@@ -14,7 +14,8 @@ M.set_glob = function(args)
 	vim.g[GLOBAL_VAR_PATTERN] = glob
 end
 
-M.get_glob = function() return vim.g[GLOBAL_VAR_PATTERN] end
+---@return string
+M.get_glob = function() return vim.g[GLOBAL_VAR_PATTERN] or '' end
 
 ---@class candidate_entry
 ---@field value string
