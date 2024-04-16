@@ -3,17 +3,18 @@ require('telescope-glob.commands')
 
 local M = {}
 
+local GLOBAL_VAR_PATTERN = 'telescope_glob_pattern'
+
 ---@class set_glob_args
 ---@field value string
 ---@param args set_glob_args
 ---To clear the existing pattern, pass an empty string as the `value`.
 M.set_glob = function(args)
 	local glob = args.value
-	-- TODO: rename global arg
-	vim.g.glob = glob
+	vim.g[GLOBAL_VAR_PATTERN] = glob
 end
 
-M.get_glob = function() return vim.g.glob end
+M.get_glob = function() return vim.g[GLOBAL_VAR_PATTERN] end
 
 ---@class candidate_entry
 ---@field value string
