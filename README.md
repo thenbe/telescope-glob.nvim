@@ -20,3 +20,24 @@
 ### 2. Apply to pickers of choice
 
 TODO: illustrate how to apply the glob pattern to various telescope pickers.
+
+### (optional) `lualine.nvim` Component
+
+As per `lualine.nvim` [docs](https://github.com/nvim-lualine/lualine.nvim?tab=readme-ov-file#lua-expressions-as-lualine-component):
+
+```lua
+sections = {
+	lualine_x = {
+		-- telescope-glob.nvim
+		{
+			function()
+				local glob_pattern = require('telescope-glob').get_glob()
+				return glob_pattern and ('  ' .. glob_pattern) or ''
+			end,
+			cond = function()
+				return package.loaded['telescope'].extensions.glob and require('telescope-glob').get_glob() ~= ''
+			end,
+		},
+	},
+}
+```
