@@ -1,25 +1,34 @@
----allows updating the glob. (prefill with current value)
----`:let g:glob = "**/*.ts"`
----`:lua vim.g.glob = "**/*.ts"`
+---Helper for setting a new glob pattern. Prefills command prompt with
+---boilerplate:
+---```vim
+---:lua require('telescope-glob.init').set_glob({ value = '$CURSOR_HERE' })
+---```
 vim.api.nvim_create_user_command('GlobUpdate', function()
 	-- ALT: vim.ui.input
-	local glob = vim.g.glob or ''
-	local prefix = ':lua vim.g.glob ='
-	vim.api.nvim_input(prefix .. " '" .. glob .. "'")
-	-- set cursor before closing quote
-	vim.api.nvim_input('<left>')
+	local glob = require('telescope-glob.init')
+	local glob_value = glob.get_glob() or ''
+	local prefix = ":lua require('telescope-glob.init').set_glob({ value = '"
+	local suffix = "' })"
+	vim.api.nvim_input(prefix .. glob_value .. suffix)
+	-- set cursor in correct position
+	vim.api.nvim_input('<left><left><left><left>')
 end, {
 	desc = 'Update search glob',
 })
 
----Helper, prefills command line with: :lua vim.g.glob = '**/{cursor_here}/**/*'
+---Helper for setting a new glob pattern to a custom directory. Prefills command
+---prompt with boilerplate:
+---```vim
+---:lua require('telescope-glob.init').set_glob({ value = '**/$CURSOR_HERE/**/*' })
+---```
 vim.api.nvim_create_user_command('GlobDir', function()
-	local glob = vim.g.glob or ''
-	local prefix = ":lua vim.g.glob = '**/"
-	local suffix = "/**/*'"
-	vim.api.nvim_input(prefix .. glob .. suffix)
-	-- set cursor before closing quote
-	vim.api.nvim_input('<left><left><left><left><left><left>')
+	local glob = require('telescope-glob.init')
+	local glob_value = glob.get_glob() or ''
+	local prefix = ":lua require('telescope-glob.init').set_glob({ value = '**/"
+	local suffix = "/**/*' })"
+	vim.api.nvim_input(prefix .. glob_value .. suffix)
+	-- set cursor in correct position
+	vim.api.nvim_input('<left><left><left><left><left><left><left><left><left>')
 end, {
 	desc = 'Update search glob',
 })
