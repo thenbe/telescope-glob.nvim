@@ -42,7 +42,7 @@ This plugin doesn't do a whole lot. This doc probably contain more lines than th
 
 In order for the selected glob pattern to take effect, we need to apply it to our pickers.
 
-The process may be slightly different for every picker. For instance, the `find_files` picker uses [`fd`](https://github.com/sharkdp/fd) under the hood. On the command line, applying a custom glob to `fd` looks like this: `fd --full-path --glob **/mydir/**/*.lua`. Therefore, we must tell telescope to pass similar flags to `fd`.
+The process may be slightly different for every picker. For instance, the `find_files` picker uses [`fd`](https://github.com/sharkdp/fd) under the hood. On the command line, applying a custom glob to `fd` looks like this: `fd --full-path --glob '**/mydir/**/*.lua'`. Therefore, we must tell telescope to pass similar flags to `fd`.
 
 Below are some examples on how to apply our glob pattern to some of the popular telescope pickers.
 
